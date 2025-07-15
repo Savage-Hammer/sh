@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ru" font="Vollkorn" tumblr-controls="black">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savage Wars Hammer Worlds</title>
+    <link rel="icon" href="img/favicon.webp" type="image/webp">
+<link rel="shortcut icon" href="img/favicon.webp">
+    <!-- waha Theme Assets -->
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400&family=Averia+Serif+Libre:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            /* Colors */
+            --background: #040404;
+            --post: #040404a8;
+            --text: #e2e2e2;
+            --link: #aa836f;
+            --border-outer: #252221;
+            --border-inner: #3a363500;
+            --highlight: #b98c58;
+            --sidebar-heading: #977969;
+            --sidebar-divider: #625b5a;
+            
+            /* Typography */
+            --font-body: 'Vollkorn', serif;
+            --font-heading: 'Averia Serif Libre', serif;
+            --font-caps: 'Averia Serif Libre', serif;
+            --base-font-size: 15px;
+            
+            /* Layout */
+            --sidebar-width: 225px;
+            --gutter: 30px;
+            --post-padding: 18px;
+        }
+        body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('abstraktny_fon_dlya_pokhoron.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(5px) brightness(0.3);
+    z-index: -1;
+    opacity: 0.7;
+}
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-body);
+            color: var(--text);
+            background-color: var(--background);
+            line-height: 1.7;
+            font-size: var(--base-font-size);
+            overscroll-behavior-y: none;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: .3px;
+            color: var(--text);
+            margin: 1.2em 0;
+        }
+        
+        h1 { 
+            font-size: 28px;
+            border-bottom: 1px solid var(--border-inner);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h2 {
+            font-size: 25px;
+            margin-top: 40px;
+            padding-top: 15px;
+        }
+        
+        h3 {
+            font-size: 20px;
+            color: var(--highlight);
+        }
+        
+        a {
+            color: var(--link);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(170, 131, 111, 0.25);
+        }
+        
+        a:hover {
+            color: var(--highlight);
+            border-bottom-color: var(--highlight);
+        }
+        
+        ::selection {
+            background: #2c2221;
+            color: var(--text);
+        }
+        
+        /* Layout Structure */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar - waha Style */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: rgba(0, 0, 0, 0.966);
+            padding: 30px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid var(--border-outer);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .sidebar-title {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--sidebar-heading);
+            padding: 0 20px 15px;
+            margin: 0 0 20px;
+            position: relative;
+            text-align: center;
+        }
+        
+        .sidebar-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--sidebar-divider), transparent);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-menu li {
+            padding: 12px 25px;
+            border-bottom: 1px solid var(--border-inner);
+            transition: background 0.3s ease;
+        }
+        
+        .sidebar-menu li:hover {
+            background: rgba(58, 54, 53, 0.3);
+        }
+        
+        .sidebar-menu li a {
+            color: var(--text);
+            font-family: var(--font-caps);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            border-bottom: none;
+        }
+        
+        .sidebar-menu li i {
+            margin-right: 12px;
+            font-size: 16px;
+            color: var(--link);
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            background-color: var(--post);
+            border-left: 1px solid var(--border-outer);
+            max-width: 800px;
+        }
+
+        /* Стили спойлеров */
+        .spoiler {
+            margin-bottom: 25px;
+            border: 1px solid var(--border-outer);
+            background: var(--post);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spoiler-header {
+            padding: 35px;
+            background: var(--post);
+            border-bottom: 1px solid var(--border-inner);
+            color: var(--sidebar-heading);
+            font-family: var(--font-caps);
+            font-size: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .spoiler-header:hover {
+            color: var(--link);
+        }
+
+        .spoiler-header:after {
+            content: "✦";
+            position: absolute;
+            right: 15px;
+            font-family: var(--font-heading);
+            transition: transform 0.3s ease;
+        }
+
+        .spoiler.active .spoiler-header:after {
+            transform: rotate(45deg);
+        }
+
+        .spoiler-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            border-top: 1px solid transparent;
+        }
+
+        .spoiler-content-inner {
+            padding: 15px;
+            border-top: 1px solid var(--border-inner);
+        }
+
+        .spoiler.active .spoiler-content {
+            max-height: 2000px;
+            border-top-color: var(--border-inner);
+        }
+
+        /* Стили содержимого */
+        .spoiler-content-inner p {
+            margin: 1em 0;
+        }
+
+        .spoiler-content-inner ul, 
+        .spoiler-content-inner ol {
+            margin: 1em 0;
+            margin-left: 1.69em;
+            padding: 0;
+        }
+
+        .spoiler-content-inner ul li {
+            position: relative;
+            padding-left: 0.25em;
+            list-style: none;
+        }
+
+        .spoiler-content-inner ul li:before {
+            content: "";
+            position: absolute;
+            margin-top: calc(((14px * 1.7) / 2) - 0px);
+            transform: translateY(-50%);
+            left: 0;
+            margin-left: calc((14px * -1.420) - 3px);
+            width: 14px;
+            height: .7px;
+            background: rgba(163, 151, 149, 0.420);
+        }
+
+        /* Анимация появления */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .main-content {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        /* waha Special Effects */
+        .waha-decoration {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-family: var(--font-caps);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--sidebar-divider);
+        }
+        
+        /* Responsive Adaptations */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--border-outer);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                border-left: none;
+                padding: 30px 20px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <h2 class="sidebar-title">Навигация</h2>
+            <ul class="sidebar-menu">
+                <li><a href="svita.html"><i class="bi bi-file-person"></i> Досье свиты</a></li>
+                <li><a href="#"><i class="bi bi-map"></i> Карта</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/1CyjQTlxQWHMVigxOyCEoIUnE8w4re12lONJ8z0npmlU/edit?usp=sharing" target="_blank"><i class="bi bi-bar-chart"></i> Опыт</a></li>
+                <li><a href="pravila.html"><i class="bi bi-journal-bookmark"></i> Правила</a></li>
+                <li><a href="#"><i class="bi bi-info-circle"></i> О кампании</a></li>
+            </ul>
+        </div>
+        
+        <div class="main-content">
+    <h1>ПРАВИЛА</h1>
+
+    <div class="spoiler">
+        <div class="spoiler-header">Правила создания нового персонажа</div>
+        <div class="spoiler-content">
+            <div class="spoiler-content-inner" style="max-height: 3000px; overflow-y: auto;">
+                <div class="postinner">
+                    <h2>Общие бонусы:</h2>
+                    <h3>Бонусное повышение:</h3>
+                    <p>Один бонус от повышения, который не считается опытом и не учитывается в списке повышений.</p>
+
+                    <h3>Характеристики и навыки:</h3>
+                    <ul>
+                        <li><strong>Знания:</strong>
+                            <ul>
+                                <li>Вы получаете два навыка "Знания" на уровне d4.</li>
+                                <li>Если хотите, можете объединить их и получить одно знание на уровне d6.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Бой и стрельба:</strong>
+                            <ul>
+                                <li>Вы получаете навыки "Драка" и "Стрельба" на уровне d4.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Выборочное знание:</strong>
+                            <p>Один из следующих навыков на уровне d4 на ваш выбор:</p>
+                            <ul>
+                                <li>Анализ текста</li>
+                                <li>Уличное чутьё</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Черты:</h3>
+                    <ul>
+                        <li>Вы можете выбрать любую одну черту, игнорируя требования к рангу, включая героические черты.</li>
+                        <li>Все остальные требования черты остаются в силе.</li>
+                    </ul>
+
+                    <h3>Создание нового персонажа после смерти старого:</h3>
+                    <p>Если ваш персонаж погибает и вы создаёте нового:</p>
+                    <ul>
+                        <li>Ваш опыт переносится, но отнимается 10 очков.</li>
+                        <li>Например:<br>Было 30 очков опыта → станет 20 очков опыта.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="spoiler">
+        <div class="spoiler-header">Ценность</div>
+        <div class="spoiler-content">
+            <div class="spoiler-content-inner" style="max-height: 3000px; overflow-y: auto;">
+                <h2>Что такое Ценность?</h2>
+                <p>Ценность олицетворяет все ресурсы в распоряжении вашего флота, которыми можно торговать: деньги, материалы, люди, товары, продовольствие, топливо, оружие и т.д.</p>
+
+                <h3>У кого есть очки Ценности?</h3>
+                <ul>
+                    <li><strong>У вашего флота.</strong> Каждый корабль способен вместить 1 очко ценности.</li>
+                    <li><strong>У звёздных систем.</strong> Чем богаче система, тем больше в ней очков ценности.</li>
+                </ul>
+
+                <h3>Зачем нужна Ценность?</h3>
+                <p>Разные звёздные системы способны оказывать вам разные услуги в обмен на очки ценности. Например:</p>
+                
+                <h4>1. Починка кораблей</h4>
+                <p>Во время боя или варп-перелёта один из кораблей может повредиться. Это значит, что его статы уменьшатся и при следующем повреждении он может быть уничтожен навсегда. Повреждённый корабль не может перевозить в себе Ценность.</p>
+                <p>В звёздных системах с верфями можно починить свои сломанные корабли.</p>
+
+                <h4>2. Найм армий</h4>
+                <p>Обычные и уникальные армии могут навсегда умереть в бою. Пополнить ряды обычной армии или нанять новых уникальных солдат можно в звёздных системах с большим количеством жителей.</p>
+
+                <h4>3. Восстановление системы</h4>
+                <p>Некоторые звёздные системы пребывают в упадке. Чтобы они начали приносить доход, их сначала нужно отстроить. У системы есть порог очков ценностей, после которых она начинает функционировать, например 2. Отдав системе ценность, можно привести её в рабочее состояние. Тогда система сможет предоставлять вам базовые услуги, а жизнь в ней улучшится.</p>
+
+                <h4>4. Открытие новых услуг</h4>
+                <p>За ценность можно "прокачивать" звёздную систему, делая её более богатой или защищённой или военизированной. Развитие системы откроет новые уникальные услуги, которые она может предоставлять.</p>
+
+                <h3>Где взять очки Ценности?</h3>
+                <ol>
+                    <li>Прилететь в новую звёздную систему</li>
+                    <li>Выполнить все миссии в системе. После этого откроется возможность взаимодействия с её Ценностями.</li>
+                    <li>Забрать из системы ценности. Один ваш корабль вмещает одну ценность. Всего у вас 11 кораблей. Так можно перевозить ценности из одной системы в другую.
+                        <ul>
+                            <li><strong>Warning:</strong> если вы перед этим устроили орбитальную бомбардировку, вряд ли в системе останутся ценности.</li>
+                            <li><strong>Warning:</strong> если захотите забрать больше, чем системе нужно для выживания, местные попытаются вас отпиздеть.</li>
+                        </ul>
+                    </li>
+                    <li>Торгуете с другими системами, заключаете нарративные договоры, предоставляете услуги Протектората в обмен на ценности.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="spoiler">
+        <div class="spoiler-header">Армии</div>
+        <div class="spoiler-content">
+            <div class="spoiler-content-inner" style="max-height: 3000px; overflow-y: auto;">
+                <h2>Что это:</h2>
+                <p>Армии — это ваши собственные боевые силы для массовых сражений.</p>
+                <p>Хотя иногда вам могут предоставляться союзные войска, основное бремя будет на ваших личных армиях.</p>
+                <p>У вас всегда есть обычная пехота — условно бесконечная и простая.</p>
+                <p>Все особые армии обладают уникальными способностями, которые могут повлиять на исход сражений.</p>
+
+                <h3>Важные моменты:</h3>
+                <ul>
+                    <li><strong>Гибель армий:</strong>
+                        <ul>
+                            <li>Особые армии могут погибнуть или выйти из строя.</li>
+                            <li>Не каждая потеря означает полное уничтожение — возможны случаи исцеления и восстановления.</li>
+                            <li>Однако, есть риск, что армия перестанет быть боеспособной и больше не сможет участвовать в массовых сражениях.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Ограничения:</strong>
+                        <ul>
+                            <li>Количество обычных армий не ограничено — это условность игры.</li>
+                            <li>Особые армии требуют более внимательного подхода, так как их потеря будет ощутимой.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Стратегия:</strong>
+                        <p>Вы можете хранить и беречь свои элитные войска, но:</p>
+                        <p>Сможете ли вы справиться без их поддержки в решающий момент?</p>
+                        <p>Решение за вами: беречь элиту или рискнуть ради победы.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="spoiler">
+        <div class="spoiler-header">Ресурсы</div>
+        <div class="spoiler-content">
+            <div class="spoiler-content-inner" style="max-height: 3000px; overflow-y: auto;">
+                <h2>Что это:</h2>
+                <p>Ресурсы — это метанаративный показатель того, насколько ваш персонаж продвигается по своему сюжету и какие возможности для этого у него есть.</p>
+                <p>Вы можете найти свои ресурсы в чарнике в разделе Additional Derived Stats (в центре).</p>
+                <p>Название ресурса условное и выбрано мной, но его можно изменить или обсудить со мной, если предложенный путь вам не подходит.</p>
+                <p>Это не реальный ресурс, а скорее ориентир... но почти реальный.</p>
+
+                <h3>Что вы можете с ними делать:</h3>
+                <ul>
+                    <li><strong>Прокачка навыков:</strong>
+                        <p>Вы можете улучшать любые навыки, кроме:</p>
+                        <ul>
+                            <li>Драка</li>
+                            <li>Стрельба</li>
+                            <li>Любая вариация Мистического навыка</li>
+                        </ul>
+                    </li>
+                    <li><strong>Получение новых навыков:</strong>
+                        <p>Например, вы можете прокачать Знания (Варп) или получить навык Пилотирования.</p>
+                    </li>
+                    <li><strong>Особые применения:</strong>
+                        <p>У некоторых персонажей есть дополнительные или уникальные способы использования ресурсов. Я свяжусь с вами лично для пояснений.</p>
+                    </li>
+                    <li><strong>Индивидуальные задумки:</strong>
+                        <p>Вы можете предложить любой проект: создание черты, новой силы, разработку технологии или даже постройку армии. Я оценю и скажу, сколько это будет стоить.</p>
+                    </li>
+                </ul>
+
+                <h3>Как их получать:</h3>
+                <ul>
+                    <li>В описании каждой миссии будет указан список персонажей, которые могут получить ресурсы.</li>
+                    <li>Важно помнить:</li>
+                    <ul>
+                        <li>Это не гарантия, а возможность — результат зависит от ваших решений и успешности миссии.</li>
+                        <li>Личное присутствие на миссии необязательно, но... доверите ли вы другим добычу вашего успеха?</li>
+                        <li>Ресурсы начисляются за миссию, а не за каждую игровую сессию.</li>
+                    </ul>
+                </ul>
+
+                <h3>Как их тратить и копить:</h3>
+                <ul>
+                    <li><strong>Максимум и текущие ресурсы:</strong>
+                        <p>Ресурсы добавляются к вашему максимуму (правая цифра в чарнике).</p>
+                        <p>Текущие ресурсы находятся левее и отображают доступное количество для трат.</p>
+                        <p>Вы можете тратить ресурсы на улучшение навыков или другие задумки, но максимум при этом не уменьшается.</p>
+                    </li>
+                    <li><strong>Пример:</strong>
+                        <p>У вас 3 ресурса по максимуму. Вы потратили 2 ресурса на обучение Скрытности (d6), оставив 1 текущий ресурс.</p>
+                        <p>После успешной миссии ваш максимум увеличится до 4, а текущие ресурсы — до 2.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="spoiler">
+        <div class="spoiler-header">Снаряжение</div>
+        <div class="spoiler-content">
+            <div class="spoiler-content-inner" style="max-height: 3000px; overflow-y: auto;">
+                <h2>Что доступно бесплатно:</h2>
+                <p>Вы можете бесплатно приобретать снаряжение из двух книг Savage Worlds:</p>
+                
+                <h3>Дневник Авантюриста (Корник):</h3>
+                <ul>
+                    <li><strong>Броня:</strong>
+                        <p>Всё, кроме:</p>
+                        <ul>
+                            <li>Футуристической</li>
+                            <li>Энергощита</li>
+                            <li>Бронестекла</li>
+                        </ul>
+                    </li>
+                    <li><strong>Холодное оружие:</strong>
+                        <p>Всё, кроме футуристического.</p>
+                    </li>
+                    <li><strong>Огнестрельное оружие:</strong>
+                        <p>Всё, с условием:</p>
+                        <p>Без современных названий.</p>
+                    </li>
+                    <li><strong>Особое оружие:</strong>
+                        <p>Всё (но учтите, что враги тоже могут воспользоваться таким вооружением!).</p>
+                    </li>
+                    <li><strong>Предметы:</strong>
+                        <p>Все.</p>
+                    </li>
+                    <li><strong>Боеприпасы:</strong>
+                        <p>Все.</p>
+                    </li>
+                </ul>
+
+                <h3>Научная фантастика (Дополнение):</h3>
+                <ul>
+                    <li><strong>Броня:</strong>
+                        <ul>
+                            <li>Бронежилет</li>
+                            <li>Космические скафандры</li>
+                        </ul>
+                    </li>
+                    <li><strong>Холодное оружие:</strong>
+                        <ul>
+                            <li>Шоковый разрядник</li>
+                        </ul>
+                    </li>
+                    <li><strong>Стрелковое оружие:</strong>
+                        <ul>
+                            <li>Гранаты</li>
+                            <li>Игломёты</li>
+                            <li>Лазеры (все, кроме многоствольного)</li>
+                            <li>Огнестрельное оружие</li>
+                            <li>Плазма (с особыми условиями)</li>
+                            <li>Огнемёты (используйте варианты из Корника).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Предметы:</strong>
+                        <p>Запрещены, пока не будет указано обратное.</p>
+                    </li>
+                </ul>
+
+                <h3>Важно:</h3>
+                <p>Всё остальное снаряжение вам придётся добывать самостоятельно.</p>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+    <script>
+        // Добавляем функциональность спойлеров
+        document.querySelectorAll('.spoiler-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const spoiler = header.parentElement;
+                spoiler.classList.toggle('active');
+            });
+        });
+
+        // Плавное появление страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>

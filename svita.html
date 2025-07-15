@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru" font="Vollkorn" tumblr-controls="black">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savage Wars Hammer Worlds</title>
+    
+    <!-- waha Theme Assets -->
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400&family=Averia+Serif+Libre:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <link rel="icon" href="img/favicon.webp" type="image/webp">
+<link rel="shortcut icon" href="img/favicon.webp">
+    <style>
+        :root {
+            /* Colors */
+            --background: #04040428;
+            --post: #040404be;
+            --text: #e2e2e2;
+            --link: #aa836f;
+            --border-outer: #25222136;
+            --border-inner: #3a363500;
+            --highlight: #b98c58;
+            --sidebar-heading: #977969;
+            --sidebar-divider: #625b5a;
+            
+            /* Typography */
+            --font-body: 'Vollkorn', serif;
+            --font-heading: 'Averia Serif Libre', serif;
+            --font-caps: 'Averia Serif Libre', serif;
+            --base-font-size: 15px;
+            
+            /* Layout */
+            --sidebar-width: 225px;
+            --gutter: 30px;
+            --post-padding: 18px;
+        }
+        body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('abstraktny_fon_dlya_pokhoron.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(5px) brightness(0.3);
+    z-index: -1;
+    opacity: 0.7;
+}
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-body);
+            color: var(--text);
+            background-color: var(--background);
+            line-height: 1.7;
+            font-size: var(--base-font-size);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: .3px;
+            color: var(--text);
+            margin: 1.2em 0;
+        }
+        
+        h1 { 
+            font-size: 28px;
+            border-bottom: 1px solid var(--border-inner);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h2 {
+            font-size: 25px;
+            margin-top: 40px;
+            padding-top: 15px;
+        }
+        
+        h3 {
+            font-size: 20px;
+            color: var(--highlight);
+        }
+        
+        a {
+            color: var(--link);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(170, 131, 111, 0.25);
+        }
+        
+        a:hover {
+            color: var(--highlight);
+            border-bottom-color: var(--highlight);
+        }
+        
+        ::selection {
+            background: #2c2221;
+            color: var(--text);
+        }
+        
+        /* Layout Structure */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar - waha Style */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: rgba(0, 0, 0, 0.966);
+            padding: 30px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid var(--border-outer);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .sidebar-title {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--sidebar-heading);
+            padding: 0 20px 15px;
+            margin: 0 0 20px;
+            position: relative;
+            text-align: center;
+        }
+        
+        .sidebar-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--sidebar-divider), transparent);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-menu li {
+            padding: 12px 25px;
+            border-bottom: 1px solid var(--border-inner);
+            transition: background 0.3s ease;
+        }
+        
+        .sidebar-menu li:hover {
+            background: rgba(58, 54, 53, 0.3);
+        }
+        
+        .sidebar-menu li a {
+            color: var(--text);
+            font-family: var(--font-caps);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            border-bottom: none;
+        }
+        
+        .sidebar-menu li i {
+            margin-right: 12px;
+            font-size: 16px;
+            color: var(--link);
+        }
+        
+        /* Main Content - waha Styled */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            background-color: #0000009d;
+            border-left: 1px solid var(--border-outer);
+        }
+        
+        /* Featured Character Section */
+        .featured-section {
+            display: flex;
+            gap: var(--gutter);
+            margin-bottom: 50px;
+            background: var(--post);
+            border: 1px solid var(--border-outer);
+            padding: var(--post-padding);
+            position: relative;
+        }
+        
+        .featured-section:before {
+            content: "";
+            position: absolute;
+            top: var(--post-padding);
+            right: var(--post-padding);
+            bottom: var(--post-padding);
+            left: var(--post-padding);
+            border: 1px solid var(--border-inner);
+            pointer-events: none;
+        }
+        
+        .featured-text {
+            flex: 1;
+            padding: 10px;
+        }
+        
+        .featured-image {
+            width: 300px;
+            height: 300px;
+            background-color: var(--border-inner);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .featured-image i {
+            font-size: 80px;
+            color: rgba(98, 91, 90, 0.5);
+        }
+        
+        /* Character Grid - waha Style */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--gutter);
+            margin-bottom: 40px;
+        }
+        
+        .character-small {
+            background-color: var(--post);
+            border: 1px solid var(--border-outer);
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .character-small:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(192, 103, 81, 0.1);
+        }
+        
+        .character-small:before {
+            content: "";
+            position: absolute;
+            top: var(--post-padding);
+            right: var(--post-padding);
+            bottom: var(--post-padding);
+            left: var(--post-padding);
+            border: 1px solid var(--border-inner);
+            pointer-events: none;
+        }
+        
+        .character-small-portrait {
+            width: 150px;
+            height: 150px;
+            background-color: var(--border-inner);
+            margin: 20px auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--highlight);
+        }
+        
+        .character-small-portrait i {
+            font-size: 50px;
+            color: rgba(98, 91, 90, 0.5);
+        }
+        
+        .character-small-content {
+            padding: 0 20px 20px;
+        }
+        
+        .character-small h3 {
+            text-align: center;
+            margin: 0 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-inner);
+        }
+        
+        .character-small p {
+            margin: 8px 0;
+            font-size: 14px;
+            font-family: var(--font-body);
+        }
+        
+        .character-small p strong {
+            color: var(--text);
+            font-family: var(--font-caps);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            min-width: 100px;
+        }
+        
+        /* Departed Characters Section */
+        .departed-characters {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 3px solid var(--highlight);
+        }
+        
+        .departed-title {
+            position: relative;
+            padding-left: 20px;
+            font-size: 22px;
+        }
+        
+        .departed-title:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background: var(--highlight);
+        }
+        /* Стили для изображений (сохраняют текущий дизайн) */
+.character-small-portrait img.character-portrait {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+        
+        /* Responsive Adaptations */
+        @media (max-width: 1200px) {
+            .character-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--border-outer);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                border-left: none;
+                padding: 30px 20px;
+            }
+            
+            .featured-section {
+                flex-direction: column;
+            }
+            
+            .featured-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1/1;
+            }
+            
+            .character-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        /* waha Special Effects */
+        .waha-decoration {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-family: var(--font-caps);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--sidebar-divider);
+        }
+        .featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.featured-image i {
+    display: none; /* Скрываем иконку, если изображение не загрузится */
+}
+.departed-characters .character-small {
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.departed-characters .character-small:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <h2 class="sidebar-title">Навигация</h2>
+            <ul class="sidebar-menu">
+                <li><a href="svita.html"><i class="bi bi-file-person"></i> Досье свиты</a></li>
+                <li><a href="#"><i class="bi bi-map"></i> Карта</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/1CyjQTlxQWHMVigxOyCEoIUnE8w4re12lONJ8z0npmlU/edit?usp=sharing" target="_blank"><i class="bi bi-bar-chart"></i> Опыт</a></li>
+                <li><a href="pravila.html"><i class="bi bi-journal-bookmark"></i> Правила</a></li>
+                <li><a href="#"><i class="bi bi-info-circle"></i> О кампании</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1>ДОСЬЕ СВИТЫ</h1>
+            
+            <!-- Featured Character -->
+            <div class="featured-section">
+                <div class="featured-text">
+                    <h2>Эйер из Феквардов</h2>
+                    <h3>Лорд-Капитан корабля "Покорительница звёзд"</h3>
+                    <p>пыр пыр пыр.</p>
+                </div>
+                <div class="featured-image">
+    <img src="img/eer-1.png" alt="Эйер из Феквардов" class="featured-portrait">
+</div>
+            </div>
+            
+            <!-- Active Characters Grid -->
+            <h2>Действующие персонажи</h2>
+            <div class="character-grid">
+
+                <!-- Character 1 -->
+                <div class="character-small">
+                    <div class="character-small-portrait"><img src="img/ast1.webp" alt="Астория" class="character-portrait">
+</div>
+                    <div class="character-small-content">
+                        <h3>Астория Веймар-Кирксен</h3>
+                        <p><strong>Должность:</strong> Сенешаль, старпом</p>
+                        <p><strong>Раса:</strong> Человек</p>
+                        <p><strong>Пол:</strong> Женский</p>
+                        <p><strong>Возраст:</strong> 23 года</p>
+                        <p><strong>Рост:</strong> 175 см</p>
+                        <p><strong>Родина:</strong> Покорительница звёзд</p>
+                    </div>
+                </div>
+
+                <!-- Character 2 -->
+                <div class="character-small">
+                    <div class="character-small-portrait"><img src="img/arkh1.webp" alt="Археос" class="character-portrait">
+</div>
+                    <div class="character-small-content">
+                        <h3>Археос</h3>
+                        <p><strong>Должность:</strong> Первый Техпровидец & Исповедник</p>
+                        <p><strong>Раса:</strong> Человек?</p>
+                        <p><strong>Пол:</strong> Мужской</p>
+                        <p><strong>Возраст:</strong>  123 года в марсианских</p>
+                        <p><strong>Рост:</strong> 195 см</p>
+                        <p><strong>Родина:</strong> Стигия 8</p>
+                    </div>
+                </div>
+
+                <!-- Character 3 -->
+                <div class="character-small">
+                    <div class="character-small-portrait">
+    <img src="img/an1.webp" alt="Анатолий" class="character-portrait">
+</div>
+                    <div class="character-small-content">
+                        <h3>Анатолий</h3>
+                        <p><strong>Должность:</strong> Начальник Вокса & Твистолов</p>
+                        <p><strong>Раса:</strong> Мутант</p>
+                        <p><strong>Пол:</strong> Мужской?</p>
+                        <p><strong>Возраст:</strong> Неизвестно</p>
+                        <p><strong>Рост:</strong> 166 см</p>
+                        <p><strong>Родина:</strong> ■■■■■■■■■■</p>
+                    </div>
+                </div>
+                
+                
+                
+                <!-- Character 4 -->
+                <div class="character-small">
+                    <div class="character-small-portrait"><img src="img/aiv1.webp" alt="Айвори" class="character-portrait">
+</div>
+                    <div class="character-small-content">
+                        <h3>Айвори Хоуп</h3>
+                        <p><strong>Должность:</strong> Хормейстер телепатики</p>
+                        <p><strong>Раса:</strong> Человек</p>
+                        <p><strong>Пол:</strong> Женский</p>
+                        <p><strong>Возраст:</strong> 48 лет</p>
+                        <p><strong>Рост:</strong> 150 см</p>
+                        <p><strong>Родина:</strong> Терра?</p>
+                    </div>
+                </div>
+                
+                <!-- Character 5 -->
+                <div class="character-small">
+                    <div class="character-small-portrait"><img src="img/bri1.webp" alt="Бриар" class="character-portrait"></div>
+                    <div class="character-small-content">
+                        <h3>Бриар</h3>
+                        <p><strong>Должность:</strong> Мастер двигателей & навигатор</p>
+                        <p><strong>Раса:</strong> Мутант-навигатор</p>
+                        <p><strong>Пол:</strong> Женский</p>
+                        <p><strong>Возраст:</strong> 18 лет</p>
+                        <p><strong>Рост:</strong> 155 см</p>
+                        <p><strong>Родина:</strong> ■■■■■■■■■■</p>
+                    </div>
+                </div>
+
+                <!-- Character 6 -->
+                <div class="character-small">
+                    <div class="character-small-portrait"><img src="img/doc1.webp" alt="Док" class="character-portrait"></div>
+                    <div class="character-small-content">
+                        <h3>Доктор</h3>
+                        <p><strong>Должность:</strong> Старший хирургеон</p>
+                        <p><strong>Раса:</strong> Человек</p>
+                        <p><strong>Пол:</strong> Мужской</p>
+                        <p><strong>Возраст:</strong> Неизвестно</p>
+                        <p><strong>Рост:</strong> 180 см</p>
+                        <p><strong>Родина:</strong> Некромунда</p>
+                    </div>
+                </div>
+
+                <!-- Character 7 -->
+                <div class="character-small">
+                    <div class="character-small-portrait"><img src="img/■■■■■■■■■■.webp" alt="■■■■■■■■■■" class="character-portrait"></div>
+                    <div class="character-small-content">
+                        <h3>Ko'Bilig</h3>
+                        <p><strong>Должность:</strong> ■■■■■■■■■■</p>
+                        <p><strong>Раса:</strong> ■■■■■■■■■■</p>
+                        <p><strong>Пол:</strong> ■■■■■■■■■■</p>
+                        <p><strong>Возраст:</strong> ■■■■■■■■■■</p>
+                        <p><strong>Рост:</strong> ■■■■■■■■■■</p>
+                        <p><strong>Родина:</strong> ■■■■■■■■■■</p>
+                    </div>
+                </div>
+
+                <!-- Character 8 -->
+                <div class="character-small">
+                    <div class="character-small-portrait"><img src="img/cre1.webp" alt="Крекиар" class="character-portrait"></div>
+                    <div class="character-small-content">
+                        <h3>Крекиар</h3>
+                        <p><strong>Должность:</strong> ---</p>
+                        <p><strong>Раса:</strong> ---</p>
+                        <p><strong>Пол:</strong> Женский</p>
+                        <p><strong>Возраст:</strong> Неизвестно</p>
+                        <p><strong>Рост:</strong> 198 см</p>
+                        <p><strong>Родина:</strong> ■■■■■■■■■■</p>
+                    </div>
+                </div>
+                
+                <!-- Character 9 -->
+                <div class="character-small">
+                    <div class="character-small-portrait"><img src="img/lou1.webp" alt="Луи" class="character-portrait"></div>
+                    <div class="character-small-content">
+                        <h3>Луи Де Герр</h3>
+                        <p><strong>Должность:</strong> Начальник боевой службы</p>
+                        <p><strong>Раса:</strong> Человек</p>
+                        <p><strong>Пол:</strong> Мужской</p>
+                        <p><strong>Возраст:</strong> 25 лет</p>
+                        <p><strong>Рост:</strong> 185 см</p>
+                        <p><strong>Родина:</strong> ■■■■■■■■■■</p>
+                    </div>
+                </div>
+
+                 <!-- Character 10 -->
+                <div class="character-small">
+                    <div class="character-small-portrait"><img src="img/■■■■■■■■■■.webp" alt="■■■■■■■■■■" class="character-portrait"></div>
+                    <div class="character-small-content">
+                        <h3>■■■■■■■■■■</h3>
+                        <p><strong>Должность:</strong> ■■■■■■■■■■</p>
+                        <p><strong>Раса:</strong> ■■■■■■■■■■</p>
+                        <p><strong>Пол:</strong> ■■■■■■■■■■</p>
+                        <p><strong>Возраст:</strong> ■■■■■■■■■■</p>
+                        <p><strong>Рост:</strong> ■■■■■■■■■■</p>
+                        <p><strong>Родина:</strong> ■■■■■■■■■■</p>
+                    </div>
+                </div>
+
+                <!-- Character 5 -->
+                <div class="character-small">
+                    <div class="character-small-portrait"><img src="img/ter1.webp" alt="Терхо" class="character-portrait"></div>
+                    <div class="character-small-content">
+                        <h3>Терхо</h3>
+                        <p><strong>Должность:</strong> Мастер вокса</p>
+                        <p><strong>Раса:</strong> ■■■■■■■■■■</p>
+                        <p><strong>Пол:</strong> Мужской</p>
+                        <p><strong>Возраст:</strong> ■■■■■■■■■■</p>
+                        <p><strong>Рост:</strong> 178 см</p>
+                        <p><strong>Родина:</strong> Некромунда</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Departed Characters -->
+            <div class="departed-characters">
+                <h2 class="departed-title">Ушедшие персонажи</h2>
+                <div class="character-grid">
+                    <!-- Departed Character 1 -->
+                    <div class="character-small">
+                        <div class="character-small-portrait"><img src="img/al1.webp" alt="Алаикан" class="character-portrait"></div>
+                        <div class="character-small-content">
+                            <h3>Алаикан из Алаитока</h3>
+                            <p><strong>Должность:</strong> Властитель слухов</p>
+                            <p><strong>Раса:</strong> Эльдар</p>
+                            <p><strong>Пол:</strong> Женский</p>
+                            <p><strong>Возраст:</strong> 265 лет</p>
+                            <p><strong>Рост:</strong> 201 см</p>
+                            <p><strong>Родина:</strong> Мир-корабль Алаиток</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Departed Character 2 -->
+                    <div class="character-small">
+                        <div class="character-small-portrait"><img src="img/r1.webp" alt="Раксаэдалис" class="character-portrait"></div>
+                        <div class="character-small-content">
+                            <h3>Раксаэдалис Корнелия</h3>
+                            <p><strong>Должность:</strong> Второй старпом & Высший фактотум</p>
+                            <p><strong>Раса:</strong> Человек</p>
+                            <p><strong>Пол:</strong> Женский</p>
+                            <p><strong>Возраст:</strong> 21 год</p>
+                            <p><strong>Рост:</strong> 160 см</p>
+                            <p><strong>Родина:</strong> Система Статоромундус</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Departed Character 3 -->
+                    <div class="character-small">
+                        <div class="character-small-portrait"><img src="img/saik1.webp" alt="Сайк" class="character-portrait"></div>
+                        <div class="character-small-content">
+                            <h3>Сайкорис</h3>
+                            <p><strong>Должность:</strong> Инфернумв</p>
+                            <p><strong>Раса:</strong> Человек</p>
+                            <p><strong>Пол:</strong> Женский</p>
+                            <p><strong>Возраст:</strong> 33 года</p>
+                            <p><strong>Рост:</strong> 175 см</p>
+                            <p><strong>Родина:</strong> ■■■■■■■■■■</p>
+                        </div>
+                    </div>
+                    <!-- Departed Character 4 -->
+                    <div class="character-small">
+                        <div class="character-small-portrait"><img src="img/701.webp" alt="701" class="character-portrait"></div>
+                        <div class="character-small-content">
+                            <h3>49 548 701</h3>
+                            <p><strong>Должность:</strong> ---</p>
+                            <p><strong>Раса:</strong> Человек</p>
+                            <p><strong>Пол:</strong> ■■■■■■■■■■</p>
+                            <p><strong>Возраст:</strong> 2_ лет</p>
+                            <p><strong>Рост:</strong> 167 см</p>
+                            <p><strong>Родина:</strong> Криг</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
